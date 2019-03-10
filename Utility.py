@@ -111,7 +111,7 @@ class Utility(object):
 
     def RandomImg(self, filelist=[]):
         randomImg = []
-        for ii in range(15):
+        for ii in range(165):
             imgIndex = random.randrange(165)
             randomImg.append(filelist[imgIndex])
 

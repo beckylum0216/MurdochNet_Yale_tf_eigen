@@ -49,19 +49,20 @@ def main():
     print("filenames: ", filename)
     dirname = "./Yale/eigenfaces/"
     eigenname = ut.readFileLabel(dirname)
-    file70, file20, file10 = ut.McCallRuleWrap(eigenname)
-    pareto90, pareto10 = ut.ParetoRule(eigenname)
     randomImg = ut.RandomImg(eigenname)
+    file70, file20, file10 = ut.McCallRuleWrap(randomImg)
+    pareto90, pareto10 = ut.ParetoRule(eigenname)
+
 
     train_images = ImageSet()
     #print(test_images.GetImageCount())
     train_images.LoadFromList(file70, 'Yale/eigenfaces')
     #print(test_images.GetImageCount())
-    imgs = train_images.GetImageRange(range(0, train_images.GetImageCount()))
+    imgs = train_images.GetRandomImages(range(0, train_images.GetImageCount()), 15)
 
     test_images = ImageSet()
     test_images.LoadFromList(file20, 'Yale/eigenfaces')
-    testImg = test_images.GetImageRange(range(0, test_images.GetImageCount()))
+    testImg = test_images.GetRandomImages(range(0, test_images.GetImageCount()), 15)
 
 
     save_base = os.path.join('.', 'saves')
