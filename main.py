@@ -50,7 +50,7 @@ def main():
     dirname = "./Yale/eigenfaces/"
     eigenname = ut.readFileLabel(dirname)
     randomImg = ut.RandomImg(eigenname)
-    file70, file20, file10 = ut.McCallRuleWrap(randomImg)
+    file70, file20, file10 = ut.McCallRuleWrap(eigenname)
     pareto90, pareto10 = ut.ParetoRule(eigenname)
 
 
@@ -58,19 +58,19 @@ def main():
     #print(test_images.GetImageCount())
     train_images.LoadFromList(file70, 'Yale/eigenfaces')
     #print(test_images.GetImageCount())
-    imgs = train_images.GetRandomImages(range(0, train_images.GetImageCount()), 15)
+    imgs = train_images.GetImageRange(range(0, train_images.GetImageCount()))
 
     test_images = ImageSet()
     test_images.LoadFromList(file20, 'Yale/eigenfaces')
-    testImg = test_images.GetRandomImages(range(0, test_images.GetImageCount()), 15)
+    testImg = test_images.GetImageRange(range(0, test_images.GetImageCount()))
 
 
     save_base = os.path.join('.', 'saves')
     nt = NeuralNet(imgs['data'].shape[1],
                    train_images.GetUniqueLabelCount())
-    for epoch in [1600]:
-        matrixPath = "confusion/confusion" + str(epoch) + ".txt"
-        reportPath = "classification/classreport" + str(epoch) + ".txt"
+    for epoch in [800, 400, 200]:
+        matrixPath = "confusion/confusion" + str(epoch) + "-mccall30-11-eigen.txt"
+        reportPath = "classification/classreport" + str(epoch) + "-mccall30-11-eigen.txt"
         save_path = os.path.join(save_base, f'save_{str(epoch).zfill(6)}')
         if not os.path.exists(save_path):
             os.makedirs(save_path)
