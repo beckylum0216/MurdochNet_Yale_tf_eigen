@@ -56,12 +56,12 @@ def main():
 
     train_images = ImageSet()
     #print(test_images.GetImageCount())
-    train_images.LoadFromList(pareto90, 'Yale/eigenfaces')
+    train_images.LoadFromList(file70, 'Yale/eigenfaces')
     #print(test_images.GetImageCount())
     imgs = train_images.GetImageRange(range(0, train_images.GetImageCount()))
 
     test_images = ImageSet()
-    test_images.LoadFromList(pareto10, 'Yale/eigenfaces')
+    test_images.LoadFromList(file10, 'Yale/eigenfaces')
     testImg = test_images.GetImageRange(range(0, test_images.GetImageCount()))
 
 
@@ -69,10 +69,8 @@ def main():
     nt = NeuralNet(imgs['data'].shape[1],
                    train_images.GetUniqueLabelCount())
     for epoch in [1600,1200,800,400]:
-        matrixPath = "confusion/confusion" + str(epoch) + "-pareto10-5" \
-                                                          "" \
-                                                          "-eigen.txt"
-        reportPath = "classification/classreport" + str(epoch) + "-pareto10-5-eigen.txt"
+        matrixPath = "confusion/confusion" + str(epoch) + "-mccall10-4-eigen.txt"
+        reportPath = "classification/classreport" + str(epoch) + "-mccall10-4-eigen.txt"
         save_path = os.path.join(save_base, f'save_{str(epoch).zfill(6)}')
         if not os.path.exists(save_path):
             os.makedirs(save_path)
@@ -94,7 +92,7 @@ def main():
     # cv2.imshow("GIF Image", img)
 
 
-    ut.DisplayImage(pareto10, "./Yale/eigenfaces")
+    ut.DisplayImage(file10, "./Yale/eigenfaces")
 
     #print("Display with overlay")
 
